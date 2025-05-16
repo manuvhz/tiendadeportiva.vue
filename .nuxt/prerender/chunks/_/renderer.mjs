@@ -74,7 +74,7 @@ function createHead(options = {}) {
   return head;
 }
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"AtletiFit - Tu tienda de ropa deportiva en Colombia"}],"link":[{"rel":"stylesheet","href":"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"}],"style":[],"script":[],"noscript":[],"title":"AtletiFit - Tienda Deportiva"};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"AuraSport - La mejor tienda de ropa deportiva en Colombia"}],"link":[{"rel":"icon","type":"image/x-icon","href":"/favicon.ico"}],"style":[],"script":[],"noscript":[],"title":"AuraSport - Tienda de Ropa Deportiva"};
 
 const appRootTag = "div";
 

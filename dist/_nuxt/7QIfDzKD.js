@@ -1,1 +1,0 @@
-import{_ as c,g as e,v as s,x as _,A as o,y as l,O as d}from"./BhiyrMnx.js";const m={};function f(t,p){const n=e("TheHeader"),a=e("TheFooter"),r=e("cart-modal");return _(),s("div",null,[o(n),l("main",null,[d(t.$slots,"default")]),o(a),o(r)])}const h=c(m,[["render",f]]);export{h as default};

@@ -1,0 +1,1 @@
+import{k as i}from"./Bul3zSeB.js";const t=i([]);let u=0;function l(){return{toasts:t,mostrarToast:(a,e="info",s=3e3)=>{const o={id:u++,mensaje:a,tipo:e,duracion:s};t.value.push(o),setTimeout(()=>{t.value=t.value.filter(r=>r.id!==o.id)},s)}}}export{l as u};

@@ -86,9 +86,6 @@
       "assets": [
         "../assets"
       ],
-      "assets/*": [
-        "../assets/*"
-      ],
       "public": [
         "../public"
       ],
@@ -101,9 +98,6 @@
       "vue-demi": [
         "../node_modules/nuxt/dist/app/compat/vue-demi"
       ],
-      "pinia": [
-        "../node_modules/pinia/dist/pinia"
-      ],
       "#vue-router": [
         "../node_modules/vue-router"
       ],
@@ -114,7 +108,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/8cbad3c5-cadb-4894-b935-cc6f4aef2bd2.json"
+        "./manifest/meta/a594fe6e-79c6-4939-9a47-0bd142bc3d99.json"
       ],
       "#components": [
         "./components"
@@ -160,8 +154,6 @@
     "./nuxt.d.ts",
     "../node_modules/@nuxtjs/tailwindcss/runtime",
     "../node_modules/@nuxtjs/tailwindcss/dist/runtime",
-    "../node_modules/@pinia/nuxt/runtime",
-    "../node_modules/@pinia/nuxt/dist/runtime",
     "../node_modules/@nuxt/devtools/runtime",
     "../node_modules/@nuxt/devtools/dist/runtime",
     "../node_modules/@nuxt/telemetry/runtime",
@@ -174,13 +166,10 @@
     "../node_modules",
     "../node_modules/nuxt/node_modules",
     "../node_modules/@nuxtjs/tailwindcss/node_modules",
-    "../node_modules/@pinia/nuxt/node_modules",
     "../node_modules/@nuxt/devtools/node_modules",
     "../node_modules/@nuxt/telemetry/node_modules",
     "../node_modules/@nuxtjs/tailwindcss/runtime/server",
     "../node_modules/@nuxtjs/tailwindcss/dist/runtime/server",
-    "../node_modules/@pinia/nuxt/runtime/server",
-    "../node_modules/@pinia/nuxt/dist/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/devtools/dist/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",

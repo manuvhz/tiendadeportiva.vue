@@ -1,4 +1,4 @@
-import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, inject, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, ref, markRaw, nextTick, onScopeDispose, watch, toRefs, computed, defineComponent, createElementBlock, provide, defineAsyncComponent, unref, h, Suspense, mergeProps, Fragment, withCtx, createVNode, useSSRContext, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, createApp } from "vue";
+import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, inject, toRef, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, defineComponent, computed, unref, ref, h, Suspense, nextTick, mergeProps, provide, Fragment, withCtx, createVNode, useSSRContext, onErrorCaptured, onServerPrefetch, resolveDynamicComponent, createApp } from "vue";
 import { $fetch } from "ofetch";
 import { baseURL } from "#internal/nuxt/paths";
 import { createHooks } from "C:/Users/varga/OneDrive/Documents/GitHub/tiendadeportiva.vue/node_modules/hookable/dist/index.mjs";
@@ -8,7 +8,6 @@ import { START_LOCATION, createMemoryHistory, createRouter as createRouter$1, us
 import { toRouteMatcher, createRouter } from "C:/Users/varga/OneDrive/Documents/GitHub/tiendadeportiva.vue/node_modules/radix3/dist/index.mjs";
 import { defu } from "C:/Users/varga/OneDrive/Documents/GitHub/tiendadeportiva.vue/node_modules/defu/dist/defu.mjs";
 import { hasProtocol, joinURL, withQuery, isScriptProtocol } from "C:/Users/varga/OneDrive/Documents/GitHub/tiendadeportiva.vue/node_modules/ufo/dist/index.mjs";
-import "C:/Users/varga/OneDrive/Documents/GitHub/tiendadeportiva.vue/node_modules/klona/dist/index.mjs";
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderSuspense, ssrRenderVNode } from "vue/server-renderer";
 if (!globalThis.$fetch) {
   globalThis.$fetch = $fetch.create({
@@ -377,7 +376,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import("./_nuxt/index-DuR-v5VA.js")
+    component: () => import("./_nuxt/index-Em2wEelS.js")
+  },
+  {
+    name: "carrito",
+    path: "/carrito",
+    component: () => import("./_nuxt/carrito-Drjjzm9X.js")
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -510,7 +514,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {};
-const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
+const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
   enforce: "pre",
   async setup(nuxtApp) {
@@ -731,565 +735,12 @@ const revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms = /* @__
     }
   }
 });
-function set(target, key, val) {
-  if (Array.isArray(target)) {
-    target.length = Math.max(target.length, key);
-    target.splice(key, 1, val);
-    return val;
-  }
-  target[key] = val;
-  return val;
-}
-function del(target, key) {
-  if (Array.isArray(target)) {
-    target.splice(key, 1);
-    return;
-  }
-  delete target[key];
-}
-/*!
- * pinia v2.3.1
- * (c) 2025 Eduardo San Martin Morote
- * @license MIT
- */
-let activePinia;
-const setActivePinia = (pinia) => activePinia = pinia;
-const piniaSymbol = process.env.NODE_ENV !== "production" ? Symbol("pinia") : (
-  /* istanbul ignore next */
-  Symbol()
-);
-function isPlainObject(o) {
-  return o && typeof o === "object" && Object.prototype.toString.call(o) === "[object Object]" && typeof o.toJSON !== "function";
-}
-var MutationType;
-(function(MutationType2) {
-  MutationType2["direct"] = "direct";
-  MutationType2["patchObject"] = "patch object";
-  MutationType2["patchFunction"] = "patch function";
-})(MutationType || (MutationType = {}));
-const IS_CLIENT = false;
-function createPinia() {
-  const scope = effectScope(true);
-  const state = scope.run(() => ref({}));
-  let _p = [];
-  let toBeInstalled = [];
-  const pinia = markRaw({
-    install(app) {
-      setActivePinia(pinia);
-      {
-        pinia._a = app;
-        app.provide(piniaSymbol, pinia);
-        app.config.globalProperties.$pinia = pinia;
-        if ((process.env.NODE_ENV !== "production" || false) && !(process.env.NODE_ENV === "test") && IS_CLIENT) ;
-        toBeInstalled.forEach((plugin2) => _p.push(plugin2));
-        toBeInstalled = [];
-      }
-    },
-    use(plugin2) {
-      if (!this._a && true) {
-        toBeInstalled.push(plugin2);
-      } else {
-        _p.push(plugin2);
-      }
-      return this;
-    },
-    _p,
-    // it's actually undefined here
-    // @ts-expect-error
-    _a: null,
-    _e: scope,
-    _s: /* @__PURE__ */ new Map(),
-    state
-  });
-  if ((process.env.NODE_ENV !== "production" || false) && !(process.env.NODE_ENV === "test") && IS_CLIENT) ;
-  return pinia;
-}
-function patchObject(newState, oldState) {
-  for (const key in oldState) {
-    const subPatch = oldState[key];
-    if (!(key in newState)) {
-      continue;
-    }
-    const targetValue = newState[key];
-    if (isPlainObject(targetValue) && isPlainObject(subPatch) && !isRef(subPatch) && !isReactive(subPatch)) {
-      newState[key] = patchObject(targetValue, subPatch);
-    } else {
-      {
-        newState[key] = subPatch;
-      }
-    }
-  }
-  return newState;
-}
-const noop = () => {
-};
-function addSubscription(subscriptions, callback, detached, onCleanup = noop) {
-  subscriptions.push(callback);
-  const removeSubscription = () => {
-    const idx = subscriptions.indexOf(callback);
-    if (idx > -1) {
-      subscriptions.splice(idx, 1);
-      onCleanup();
-    }
-  };
-  if (!detached && getCurrentScope()) {
-    onScopeDispose(removeSubscription);
-  }
-  return removeSubscription;
-}
-function triggerSubscriptions(subscriptions, ...args) {
-  subscriptions.slice().forEach((callback) => {
-    callback(...args);
-  });
-}
-const fallbackRunWithContext = (fn) => fn();
-const ACTION_MARKER = Symbol();
-const ACTION_NAME = Symbol();
-function mergeReactiveObjects(target, patchToApply) {
-  if (target instanceof Map && patchToApply instanceof Map) {
-    patchToApply.forEach((value, key) => target.set(key, value));
-  } else if (target instanceof Set && patchToApply instanceof Set) {
-    patchToApply.forEach(target.add, target);
-  }
-  for (const key in patchToApply) {
-    if (!patchToApply.hasOwnProperty(key))
-      continue;
-    const subPatch = patchToApply[key];
-    const targetValue = target[key];
-    if (isPlainObject(targetValue) && isPlainObject(subPatch) && target.hasOwnProperty(key) && !isRef(subPatch) && !isReactive(subPatch)) {
-      target[key] = mergeReactiveObjects(targetValue, subPatch);
-    } else {
-      target[key] = subPatch;
-    }
-  }
-  return target;
-}
-const skipHydrateSymbol = process.env.NODE_ENV !== "production" ? Symbol("pinia:skipHydration") : (
-  /* istanbul ignore next */
-  Symbol()
-);
-function shouldHydrate(obj) {
-  return !isPlainObject(obj) || !obj.hasOwnProperty(skipHydrateSymbol);
-}
-const { assign } = Object;
-function isComputed(o) {
-  return !!(isRef(o) && o.effect);
-}
-function createOptionsStore(id, options, pinia, hot) {
-  const { state, actions, getters } = options;
-  const initialState = pinia.state.value[id];
-  let store;
-  function setup() {
-    if (!initialState && (!(process.env.NODE_ENV !== "production") || !hot)) {
-      {
-        pinia.state.value[id] = state ? state() : {};
-      }
-    }
-    const localState = process.env.NODE_ENV !== "production" && hot ? (
-      // use ref() to unwrap refs inside state TODO: check if this is still necessary
-      toRefs(ref(state ? state() : {}).value)
-    ) : toRefs(pinia.state.value[id]);
-    return assign(localState, actions, Object.keys(getters || {}).reduce((computedGetters, name) => {
-      if (process.env.NODE_ENV !== "production" && name in localState) {
-        console.warn(`[🍍]: A getter cannot have the same name as another state property. Rename one of them. Found with "${name}" in store "${id}".`);
-      }
-      computedGetters[name] = markRaw(computed(() => {
-        setActivePinia(pinia);
-        const store2 = pinia._s.get(id);
-        return getters[name].call(store2, store2);
-      }));
-      return computedGetters;
-    }, {}));
-  }
-  store = createSetupStore(id, setup, options, pinia, hot, true);
-  return store;
-}
-function createSetupStore($id, setup, options = {}, pinia, hot, isOptionsStore) {
-  let scope;
-  const optionsForPlugin = assign({ actions: {} }, options);
-  if (process.env.NODE_ENV !== "production" && !pinia._e.active) {
-    throw new Error("Pinia destroyed");
-  }
-  const $subscribeOptions = { deep: true };
-  if (process.env.NODE_ENV !== "production" && true) {
-    $subscribeOptions.onTrigger = (event) => {
-      if (isListening) {
-        debuggerEvents = event;
-      } else if (isListening == false && !store._hotUpdating) {
-        if (Array.isArray(debuggerEvents)) {
-          debuggerEvents.push(event);
-        } else {
-          console.error("🍍 debuggerEvents should be an array. This is most likely an internal Pinia bug.");
-        }
-      }
-    };
-  }
-  let isListening;
-  let isSyncListening;
-  let subscriptions = [];
-  let actionSubscriptions = [];
-  let debuggerEvents;
-  const initialState = pinia.state.value[$id];
-  if (!isOptionsStore && !initialState && (!(process.env.NODE_ENV !== "production") || !hot)) {
-    {
-      pinia.state.value[$id] = {};
-    }
-  }
-  const hotState = ref({});
-  let activeListener;
-  function $patch(partialStateOrMutator) {
-    let subscriptionMutation;
-    isListening = isSyncListening = false;
-    if (process.env.NODE_ENV !== "production") {
-      debuggerEvents = [];
-    }
-    if (typeof partialStateOrMutator === "function") {
-      partialStateOrMutator(pinia.state.value[$id]);
-      subscriptionMutation = {
-        type: MutationType.patchFunction,
-        storeId: $id,
-        events: debuggerEvents
-      };
-    } else {
-      mergeReactiveObjects(pinia.state.value[$id], partialStateOrMutator);
-      subscriptionMutation = {
-        type: MutationType.patchObject,
-        payload: partialStateOrMutator,
-        storeId: $id,
-        events: debuggerEvents
-      };
-    }
-    const myListenerId = activeListener = Symbol();
-    nextTick().then(() => {
-      if (activeListener === myListenerId) {
-        isListening = true;
-      }
-    });
-    isSyncListening = true;
-    triggerSubscriptions(subscriptions, subscriptionMutation, pinia.state.value[$id]);
-  }
-  const $reset = isOptionsStore ? function $reset2() {
-    const { state } = options;
-    const newState = state ? state() : {};
-    this.$patch(($state) => {
-      assign($state, newState);
-    });
-  } : (
-    /* istanbul ignore next */
-    process.env.NODE_ENV !== "production" ? () => {
-      throw new Error(`🍍: Store "${$id}" is built using the setup syntax and does not implement $reset().`);
-    } : noop
-  );
-  function $dispose() {
-    scope.stop();
-    subscriptions = [];
-    actionSubscriptions = [];
-    pinia._s.delete($id);
-  }
-  const action = (fn, name = "") => {
-    if (ACTION_MARKER in fn) {
-      fn[ACTION_NAME] = name;
-      return fn;
-    }
-    const wrappedAction = function() {
-      setActivePinia(pinia);
-      const args = Array.from(arguments);
-      const afterCallbackList = [];
-      const onErrorCallbackList = [];
-      function after(callback) {
-        afterCallbackList.push(callback);
-      }
-      function onError(callback) {
-        onErrorCallbackList.push(callback);
-      }
-      triggerSubscriptions(actionSubscriptions, {
-        args,
-        name: wrappedAction[ACTION_NAME],
-        store,
-        after,
-        onError
-      });
-      let ret;
-      try {
-        ret = fn.apply(this && this.$id === $id ? this : store, args);
-      } catch (error) {
-        triggerSubscriptions(onErrorCallbackList, error);
-        throw error;
-      }
-      if (ret instanceof Promise) {
-        return ret.then((value) => {
-          triggerSubscriptions(afterCallbackList, value);
-          return value;
-        }).catch((error) => {
-          triggerSubscriptions(onErrorCallbackList, error);
-          return Promise.reject(error);
-        });
-      }
-      triggerSubscriptions(afterCallbackList, ret);
-      return ret;
-    };
-    wrappedAction[ACTION_MARKER] = true;
-    wrappedAction[ACTION_NAME] = name;
-    return wrappedAction;
-  };
-  const _hmrPayload = /* @__PURE__ */ markRaw({
-    actions: {},
-    getters: {},
-    state: [],
-    hotState
-  });
-  const partialStore = {
-    _p: pinia,
-    // _s: scope,
-    $id,
-    $onAction: addSubscription.bind(null, actionSubscriptions),
-    $patch,
-    $reset,
-    $subscribe(callback, options2 = {}) {
-      const removeSubscription = addSubscription(subscriptions, callback, options2.detached, () => stopWatcher());
-      const stopWatcher = scope.run(() => watch(() => pinia.state.value[$id], (state) => {
-        if (options2.flush === "sync" ? isSyncListening : isListening) {
-          callback({
-            storeId: $id,
-            type: MutationType.direct,
-            events: debuggerEvents
-          }, state);
-        }
-      }, assign({}, $subscribeOptions, options2)));
-      return removeSubscription;
-    },
-    $dispose
-  };
-  const store = reactive(process.env.NODE_ENV !== "production" || (process.env.NODE_ENV !== "production" || false) && !(process.env.NODE_ENV === "test") && IS_CLIENT ? assign(
-    {
-      _hmrPayload,
-      _customProperties: markRaw(/* @__PURE__ */ new Set())
-      // devtools custom properties
-    },
-    partialStore
-    // must be added later
-    // setupStore
-  ) : partialStore);
-  pinia._s.set($id, store);
-  const runWithContext = pinia._a && pinia._a.runWithContext || fallbackRunWithContext;
-  const setupStore = runWithContext(() => pinia._e.run(() => (scope = effectScope()).run(() => setup({ action }))));
-  for (const key in setupStore) {
-    const prop = setupStore[key];
-    if (isRef(prop) && !isComputed(prop) || isReactive(prop)) {
-      if (process.env.NODE_ENV !== "production" && hot) {
-        set(hotState.value, key, toRef(setupStore, key));
-      } else if (!isOptionsStore) {
-        if (initialState && shouldHydrate(prop)) {
-          if (isRef(prop)) {
-            prop.value = initialState[key];
-          } else {
-            mergeReactiveObjects(prop, initialState[key]);
-          }
-        }
-        {
-          pinia.state.value[$id][key] = prop;
-        }
-      }
-      if (process.env.NODE_ENV !== "production") {
-        _hmrPayload.state.push(key);
-      }
-    } else if (typeof prop === "function") {
-      const actionValue = process.env.NODE_ENV !== "production" && hot ? prop : action(prop, key);
-      {
-        setupStore[key] = actionValue;
-      }
-      if (process.env.NODE_ENV !== "production") {
-        _hmrPayload.actions[key] = prop;
-      }
-      optionsForPlugin.actions[key] = prop;
-    } else if (process.env.NODE_ENV !== "production") {
-      if (isComputed(prop)) {
-        _hmrPayload.getters[key] = isOptionsStore ? (
-          // @ts-expect-error
-          options.getters[key]
-        ) : prop;
-      }
-    }
-  }
-  {
-    assign(store, setupStore);
-    assign(toRaw(store), setupStore);
-  }
-  Object.defineProperty(store, "$state", {
-    get: () => process.env.NODE_ENV !== "production" && hot ? hotState.value : pinia.state.value[$id],
-    set: (state) => {
-      if (process.env.NODE_ENV !== "production" && hot) {
-        throw new Error("cannot set hotState");
-      }
-      $patch(($state) => {
-        assign($state, state);
-      });
-    }
-  });
-  if (process.env.NODE_ENV !== "production") {
-    store._hotUpdate = markRaw((newStore) => {
-      store._hotUpdating = true;
-      newStore._hmrPayload.state.forEach((stateKey) => {
-        if (stateKey in store.$state) {
-          const newStateTarget = newStore.$state[stateKey];
-          const oldStateSource = store.$state[stateKey];
-          if (typeof newStateTarget === "object" && isPlainObject(newStateTarget) && isPlainObject(oldStateSource)) {
-            patchObject(newStateTarget, oldStateSource);
-          } else {
-            newStore.$state[stateKey] = oldStateSource;
-          }
-        }
-        set(store, stateKey, toRef(newStore.$state, stateKey));
-      });
-      Object.keys(store.$state).forEach((stateKey) => {
-        if (!(stateKey in newStore.$state)) {
-          del(store, stateKey);
-        }
-      });
-      isListening = false;
-      isSyncListening = false;
-      pinia.state.value[$id] = toRef(newStore._hmrPayload, "hotState");
-      isSyncListening = true;
-      nextTick().then(() => {
-        isListening = true;
-      });
-      for (const actionName in newStore._hmrPayload.actions) {
-        const actionFn = newStore[actionName];
-        set(store, actionName, action(actionFn, actionName));
-      }
-      for (const getterName in newStore._hmrPayload.getters) {
-        const getter = newStore._hmrPayload.getters[getterName];
-        const getterValue = isOptionsStore ? (
-          // special handling of options api
-          computed(() => {
-            setActivePinia(pinia);
-            return getter.call(store, store);
-          })
-        ) : getter;
-        set(store, getterName, getterValue);
-      }
-      Object.keys(store._hmrPayload.getters).forEach((key) => {
-        if (!(key in newStore._hmrPayload.getters)) {
-          del(store, key);
-        }
-      });
-      Object.keys(store._hmrPayload.actions).forEach((key) => {
-        if (!(key in newStore._hmrPayload.actions)) {
-          del(store, key);
-        }
-      });
-      store._hmrPayload = newStore._hmrPayload;
-      store._getters = newStore._getters;
-      store._hotUpdating = false;
-    });
-  }
-  if ((process.env.NODE_ENV !== "production" || false) && !(process.env.NODE_ENV === "test") && IS_CLIENT) ;
-  pinia._p.forEach((extender) => {
-    if ((process.env.NODE_ENV !== "production" || false) && !(process.env.NODE_ENV === "test") && IS_CLIENT) ;
-    else {
-      assign(store, scope.run(() => extender({
-        store,
-        app: pinia._a,
-        pinia,
-        options: optionsForPlugin
-      })));
-    }
-  });
-  if (process.env.NODE_ENV !== "production" && store.$state && typeof store.$state === "object" && typeof store.$state.constructor === "function" && !store.$state.constructor.toString().includes("[native code]")) {
-    console.warn(`[🍍]: The "state" must be a plain object. It cannot be
-	state: () => new MyClass()
-Found in store "${store.$id}".`);
-  }
-  if (initialState && isOptionsStore && options.hydrate) {
-    options.hydrate(store.$state, initialState);
-  }
-  isListening = true;
-  isSyncListening = true;
-  return store;
-}
-/*! #__NO_SIDE_EFFECTS__ */
-// @__NO_SIDE_EFFECTS__
-function defineStore(idOrOptions, setup, setupOptions) {
-  let id;
-  let options;
-  const isSetupStore = typeof setup === "function";
-  {
-    id = idOrOptions;
-    options = isSetupStore ? setupOptions : setup;
-  }
-  function useStore(pinia, hot) {
-    const hasContext = hasInjectionContext();
-    pinia = // in test mode, ignore the argument provided as we can always retrieve a
-    // pinia instance with getActivePinia()
-    (process.env.NODE_ENV === "test" && activePinia && activePinia._testing ? null : pinia) || (hasContext ? inject(piniaSymbol, null) : null);
-    if (pinia)
-      setActivePinia(pinia);
-    if (process.env.NODE_ENV !== "production" && !activePinia) {
-      throw new Error(`[🍍]: "getActivePinia()" was called but there was no active Pinia. Are you trying to use a store before calling "app.use(pinia)"?
-See https://pinia.vuejs.org/core-concepts/outside-component-usage.html for help.
-This will fail in production.`);
-    }
-    pinia = activePinia;
-    if (!pinia._s.has(id)) {
-      if (isSetupStore) {
-        createSetupStore(id, setup, options, pinia);
-      } else {
-        createOptionsStore(id, options, pinia);
-      }
-      if (process.env.NODE_ENV !== "production") {
-        useStore._pinia = pinia;
-      }
-    }
-    const store = pinia._s.get(id);
-    if (process.env.NODE_ENV !== "production" && hot) {
-      const hotId = "__hot:" + id;
-      const newStore = isSetupStore ? createSetupStore(hotId, setup, options, pinia, true) : createOptionsStore(hotId, assign({}, options), pinia, true);
-      hot._hotUpdate(newStore);
-      delete pinia.state.value[hotId];
-      pinia._s.delete(hotId);
-    }
-    if (process.env.NODE_ENV !== "production" && IS_CLIENT) ;
-    return store;
-  }
-  useStore.$id = id;
-  return useStore;
-}
+const components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4 = /* @__PURE__ */ defineNuxtPlugin({
+  name: "nuxt:global-components"
+});
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
 }
-defineComponent({
-  name: "ServerPlaceholder",
-  render() {
-    return createElementBlock("div");
-  }
-});
-const clientOnlySymbol = Symbol.for("nuxt:client-only");
-defineComponent({
-  name: "ClientOnly",
-  inheritAttrs: false,
-  props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
-  setup(_, { slots, attrs }) {
-    const mounted = ref(false);
-    const vm = getCurrentInstance();
-    if (vm) {
-      vm._nuxtClientOnly = true;
-    }
-    provide(clientOnlySymbol, true);
-    return (props) => {
-      var _a;
-      if (mounted.value) {
-        return (_a = slots.default) == null ? void 0 : _a.call(slots);
-      }
-      const slot = slots.fallback || slots.placeholder;
-      if (slot) {
-        return slot();
-      }
-      const fallbackStr = props.fallback || props.placeholder || "";
-      const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
-      return createElementBlock(fallbackTag, attrs, fallbackStr);
-    };
-  }
-});
 function useRequestEvent(nuxtApp) {
   var _a;
   nuxtApp || (nuxtApp = useNuxtApp());
@@ -1302,22 +753,6 @@ function prerenderRoutes(path) {
   const paths = toArray(path);
   appendHeader(useRequestEvent(), "x-nitro-prerender", paths.map((p) => encodeURIComponent(p)).join(", "));
 }
-const plugin = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  const pinia = createPinia();
-  nuxtApp.vueApp.use(pinia);
-  setActivePinia(pinia);
-  {
-    nuxtApp.payload.pinia = pinia.state.value;
-  }
-  return {
-    provide: {
-      pinia
-    }
-  };
-});
-const components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4 = /* @__PURE__ */ defineNuxtPlugin({
-  name: "nuxt:global-components"
-});
 let routes;
 const prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk = /* @__PURE__ */ defineNuxtPlugin(async () => {
   let __temp, __restore;
@@ -1360,14 +795,13 @@ function processRoutes(routes2, currentPath = "/", routesToPrerender = /* @__PUR
 }
 const plugins = [
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
-  plugin$1,
-  revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
   plugin,
+  revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4,
   prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import("./_nuxt/default-D7lhkj73.js").then((m) => m.default || m))
+  default: defineAsyncComponent(() => import("./_nuxt/default-uMDvVmoq.js").then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",
@@ -1607,8 +1041,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-P9S86Lo0.js"));
-    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-g9POzYj3.js"));
+    const _Error404 = defineAsyncComponent(() => import("./_nuxt/error-404-B-WY4Xiy.js"));
+    const _Error = defineAsyncComponent(() => import("./_nuxt/error-500-D-dLeJ5P.js"));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -1694,7 +1128,6 @@ export {
   useNuxtApp as a,
   useRuntimeConfig as b,
   nuxtLinkDefaults as c,
-  defineStore as d,
   entry$1 as default,
   navigateTo as n,
   resolveRouteObject as r,

@@ -1,18 +1,26 @@
 {
-  "name": "atletifit",
-  "private": true,
+  "name": "tiendadeportiva.vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nuxt.config.js",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "nuxt": "^3.7.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuvhz/tiendadeportiva.vue.git"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/manuvhz/tiendadeportiva.vue/issues"
+  },
+  "homepage": "https://github.com/manuvhz/tiendadeportiva.vue#readme",
   "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
-    "pinia": "^2.1.6"
+    "@nuxt/kit": "^3.17.3",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "nuxt": "^3.17.3"
   }
 }
